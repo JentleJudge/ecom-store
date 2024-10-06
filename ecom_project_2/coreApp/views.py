@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib import messages
 from django.db.models import Q
 
 from .models import Category, Product
 from .forms import UserRegisterForm, UserLoginForm, ProductRegisterForm
+
+from payment.models import ShippingAddress
+from payment.forms import ShippingForm
 
 
 def home(request):
@@ -79,19 +82,16 @@ def new_item(request):
     return render(request, "coreApp/new_item.html", context)
 
 
-
 def detail(request, pk):
     # product = Product.objects.get(pk=pk)
     product = get_object_or_404(Product, pk=pk)
     related_products = Product.objects.filter(category=product.category).exclude(pk=pk)
-
 
     context = {
         "product": product,
         "related_products": related_products,
     }
     return render(request, "coreApp/item_detail.html", context)
-
 
 
 @login_required
@@ -149,8 +149,33 @@ def dashboard(request):
     return render(request, "coreApp/dashboard.html", context)
 
 
+# Shipping view
+@login_required
+def manage_shipping(request):
+    try:
+        # Account user with shipment information
+        shipping = ShippingAddress.objects.get(user=request.user.id)
+    except ShippingAddress.DoesNotExist:
+        # Account user with no shipment information
+        shipping = None
 
+    form = ShippingForm(instance=shipping)
 
+    if request.method == 'POST':
+        form = ShippingForm(request.POST, instance=shipping)
+        if form.is_valid():
+            # Assign the user FK on the object
+            shipping_user = form.save(commit=False)
 
+            # Adding the FK itself
+            shipping_user.user = request.user
+
+            shipping_user.save()
+            messages.info(request, "Update success!")
+
+            return redirect('coreApp:home')
+
+    context = {'form': form}
+    return render(request, 'coreApp/manage_shipping.html', context)
 
 

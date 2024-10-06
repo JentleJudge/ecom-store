@@ -11,73 +11,158 @@
     <!--Google symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
+
     <!--Jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <body>
-      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-      <div class="container-fluid container">
-        <a class="navbar-brand" href="{% url 'coreApp:home' %}">My Ecom Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Category
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">All</a></li>
+<!--  <body>-->
+<!--      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">-->
+<!--      <div class="container-fluid">-->
+<!--        <a class="navbar-brand flex-grow-1" href="{% url 'coreApp:home' %}">My Ecom Store</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--          <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--          <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link active" aria-current="page" href="/">Home</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item dropdown">-->
+<!--              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                Category-->
+<!--              </a>-->
+<!--              <ul class="dropdown-menu">-->
+<!--                <li><a class="dropdown-item" href="#">All</a></li>-->
 
-                {% for category in all_categories %}-->
-                <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>
-                {% endfor %}
-              </ul>
-            </li>
+<!--                {% for category in all_categories %}&ndash;&gt;-->
+<!--                <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>-->
+<!--                {% endfor %}-->
+<!--              </ul>-->
+<!--            </li>-->
 
 
-            {% if request.user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="#">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'coreApp:add-item' %}">Add item</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'conversation:inbox' %}">Inbox</a>
-            </li>
-<!--             <li class="nav-item">-->
+<!--            {% if request.user.is_authenticated %}-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="#">Dashboard</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'coreApp:add-item' %}">Add item</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
 <!--              <a class="nav-link" href="{% url 'conversation:inbox' %}">Inbox</a>-->
 <!--            </li>-->
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'coreApp:dashboard' %}">@{{ request.user }}</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'coreApp:logout' %}">Logout</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'coreApp:signup' %}">Signup</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'coreApp:login' %}">Login</a>
-            </li>
-            {% endif %}
-          </ul>
+<!--&lt;!&ndash;             <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;              <a class="nav-link" href="{% url 'conversation:inbox' %}">Inbox</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'coreApp:dashboard' %}">@{{ request.user }}</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'coreApp:logout' %}">Logout</a>-->
+<!--            </li>-->
+<!--            {% else %}-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'coreApp:signup' %}">Signup</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a class="nav-link" href="{% url 'coreApp:login' %}">Login</a>-->
+<!--            </li>-->
+<!--            {% endif %}-->
+<!--          </ul>-->
 
-          <form class="d-flex" role="search" action="{% url 'coreApp:david' %}">
-            <input class="form-control me-2" name="query" value="{{ query }}" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+<!--          <form class="d-flex" role="search" action="{% url 'coreApp:david' %}">-->
+<!--            <input class="form-control me-2" name="query" value="{{ query }}" type="search" placeholder="Search" aria-label="Search">-->
+<!--            <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--          </form>-->
 
+<!--          &lt;!&ndash;CART START &ndash;&gt;-->
+<!--          <ul class="navbar-nav ms-2 mb-2 mb-lg-0">-->
+<!--            <li class="nav-item">-->
+<!--                <a href="{% url 'cart:cart-summary' %}" class="btn btn-outline-warning">-->
+<!--                  Cart-->
+<!--                  <span id="cart-qty" class="text-white">-->
+<!--                    {% with qty_amount=cart|length %}-->
+<!--                      {% if qty_amount > 0 %}-->
+<!--                        {{ qty_amount }}-->
+<!--                      {% else %}-->
+<!--                        0-->
+<!--                      {% endif %}-->
+
+<!--                    {% endwith %}-->
+<!--                  </span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--          &lt;!&ndash;CART END&ndash;&gt;-->
+
+
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container-fluid">
+
+         <li class="nav-item flex-grow-1">
+             <a class="navbar-brand " href="{% url 'coreApp:home' %}">My Ecom Store</a>
+         </li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Category </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">All</a></li>
+                        {% for category in all_categories %}
+                        <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{% url 'coreApp:dashboard' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">@{{ request.user }}</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'coreApp:dashboard' %}">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="{% url 'coreApp:add-item' %}">Add item</a></li>
+                        <li><a class="dropdown-item" href="{% url 'conversation:inbox' %}">Inbox</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item" style="color: white;"><a class="nav-link" href="{% url 'coreApp:logout' %}">Logout</a></li>
+                {% else %}
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'coreApp:signup' %}">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'coreApp:login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+            <form class="d-flex" role="search" action="{% url 'coreApp:david' %}">
+                <input class="form-control me-2" name="query" value="{{ query }}" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <!--CART START -->
+            <ul class="navbar-nav ms-2 mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="{% url 'cart:cart-summary' %}" class="btn btn-outline-warning"> Cart <span id="cart-qty" class="text-white"> {% with qty_amount=cart|length %} {% if qty_amount > 0 %} {{ qty_amount }} {% else %} 0 {% endif %} {% endwith %} </span> </a>
+                </li>
+            </ul>
+            <!--CART END-->
         </div>
-      </div>
-    </nav>
+    </div>
+</nav>
+
+
 
       <div class="container">
           {% block content %}{% endblock content %}

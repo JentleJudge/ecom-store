@@ -21,7 +21,6 @@ def new_conversation(request, item_pk):
         return redirect("conversation:detail", pk=conversation.first().id)
            # return redirect("conversation:detail", )
 
-
     if request.method == "POST":
         form = ConversationMessageForm(request.POST)
         if form.is_valid():
@@ -44,13 +43,11 @@ def new_conversation(request, item_pk):
     return render(request, "conversation/new.html", context)
 
 
-
 def inbox(request):
     conversations = Conversation.objects.filter(members__in=[request.user.id])
 
     context = {"conversations": conversations}
     return render(request, "conversation/inbox.html", context)
-
 
 
 def detail(request, pk):
@@ -75,8 +72,4 @@ def detail(request, pk):
         "conversation": conversation
     }
     return render(request, "conversation/detail.html", context)
-
-
-
-
 
